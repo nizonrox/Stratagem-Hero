@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stratagem Hero</title>
     <!-- Include PixiJS library -->
     <script src="https://pixijs.download/release/pixi.js"></script>
     <link rel="stylesheet" href="stylesheet.css">
-</head>
-<body>
+  </head>
+  <body>
     <script>
         const app = new PIXI.Application({
             width: window.innerWidth,
@@ -152,38 +152,43 @@
         nextSequence(); // Initial sequence
 
         function handleKeyPress(event) {
-            const key = event.key.toLowerCase();
-            const direction = {
-                'w': 'up',
-                's': 'down',
-                'd': 'right',
-                'a': 'left'
-            }[key];
+    const key = event.key.toLowerCase();
+    const direction = {
+        'w': 'up',
+        's': 'down',
+        'd': 'right',
+        'a': 'left',
+        'arrowup': 'up',
+        'arrowdown': 'down',
+        'arrowright': 'right',
+        'arrowleft': 'left'
+    }[key];
 
-            if (direction) {
-                if (incorrectInput) {
-                    resetTints();
-                    incorrectInput = false;
-                }
-                
-                if (direction === sequence[sequenceIndexCounter]) {
-                    const currentSprite = app.stage.children[sequenceIndexCounter];
-                    currentSprite.tint = 0x00ff00;
-                    sequenceIndexCounter++;
-                    if (sequenceIndexCounter === sequence.length) {
-                        sequenceIndexCounter = 0;
-                        nextSequence(); // Call next sequence
-                    }
-                } else {
-                    for (let i = 0; i < sequenceIndexCounter; i++) {
-                        const previousCorrectSprite = app.stage.children[i];
-                        previousCorrectSprite.tint = 0xff0000;
-                    }
-                    sequenceIndexCounter = 0;
-                    incorrectInput = true;
-                }
-            }
+    if (direction) {
+        if (incorrectInput) {
+            resetTints();
+            incorrectInput = false;
         }
+        
+        if (direction === sequence[sequenceIndexCounter]) {
+            const currentSprite = app.stage.children[sequenceIndexCounter];
+            currentSprite.tint = 0x00ff00;
+            sequenceIndexCounter++;
+            if (sequenceIndexCounter === sequence.length) {
+                sequenceIndexCounter = 0;
+                nextSequence(); // Call next sequence
+            }
+        } else {
+            for (let i = 0; i < sequenceIndexCounter; i++) {
+                const previousCorrectSprite = app.stage.children[i];
+                previousCorrectSprite.tint = 0xff0000;
+            }
+            sequenceIndexCounter = 0;
+            incorrectInput = true;
+        }
+    }
+}
+
 
         function resetTints() {
             app.stage.children.forEach(sprite => {
@@ -195,5 +200,5 @@
 
         document.addEventListener('keydown', handleKeyPress);
     </script>
-</body>
+  </body>
 </html>
