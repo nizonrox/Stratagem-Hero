@@ -8,8 +8,9 @@ Any contribution is welcome :)
 
 TODO:
 - Add timer
+- Add rounds
 - Add score
 - Add sounds
 - Proof read all stratagems
-- Remove/add statagems specific to stratagem hero list
+- Add stratagem icons/images
 - Fix windows resize
