@@ -64,5 +64,8 @@ const possibleSequences = [
     { name: 'SOS Beacon', sequence: ['up', 'down', 'right', 'up'] },
     { name: 'Super Earth Flag', sequence: ['down', 'up', 'down', 'up'] },
     { name: 'Upload Data', sequence: ['left', 'right', 'up', 'up', 'up'] },
-    { name: 'Hellbomb', sequence: ['down', 'up', 'left', 'down', 'up', 'right', 'down', 'up'] }
+    { name: 'Hellbomb', sequence: ['down', 'up', 'left', 'down', 'up', 'right', 'down', 'up'] },
+
+    // Stratagem Hero Special
+    { name: 'Orbital Illumination Flare', sequence: ['right', 'right', 'left', 'left'] }
 ];
