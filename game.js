@@ -17,7 +17,7 @@ function initializeSequence() {
 let sequenceIndexCounter = 0;
 let incorrectInput = false;
 
-let sequence; sequenceName;
+let sequence, sequenceName;
 
 function nextSequence() {
     const selectedSequence = initializeSequence();
