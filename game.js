@@ -1,3 +1,4 @@
+// Pixi.js Config
 const app = new PIXI.Application({
     antialias: true,
     autoDensity: true,
@@ -7,29 +8,24 @@ const app = new PIXI.Application({
     width: Math.max(1, window.innerWidth),
 });
 
-
-
-function initializeSequence() {
-    const sequenceIndex = Math.floor(Math.random() * possibleSequences.length);
-    return possibleSequences[sequenceIndex];
-}
-
+// Values for game logic
 let sequenceIndexCounter = 0;
 let incorrectInput = false;
-
 let sequence, sequenceName;
 
-function nextSequence() {
-    const selectedSequence = initializeSequence();
-    sequence = selectedSequence.sequence;
-    sequenceName = selectedSequence.name;
-    renderSequence(sequence);
+function resetTints() {
+    app.stage.children.forEach(sprite => {
+        if (sprite.tint !== 0xffffff) {
+            sprite.tint = 0xffffff;
+        }
+    });
 }
 
 function renderSequence(sequence) {
      // x & y setup for arrow placement
     let x = app.screen.width / 2 - (sequence.length - 1) * 35;
     let y = app.screen.height / 2;
+    
 
     app.stage.removeChildren(); // Clear previous sequence
 
@@ -48,7 +44,9 @@ function renderSequence(sequence) {
             case 'left':
                 sprite = PIXI.Sprite.from('left.png');
                 break;
-        }
+            default:
+                // Nothing
+        };
 
         if (sprite) {
             sprite.anchor.set(0.5); // Set sprite to anchor center
@@ -56,7 +54,7 @@ function renderSequence(sequence) {
             sprite.y = y;
             app.stage.addChild(sprite); // Add sprite to stage
             x += 70; // Margin to move arrows over
-        }
+        };
     });
 
     // Stratagem name text
@@ -73,7 +71,16 @@ function renderSequence(sequence) {
     text.x = app.screen.width / 2;
     text.y = app.screen.height / 2.5;
     app.stage.addChild(text); // Add text to stage
-}
+};
+
+// Function to make a random number in the range of how many entries there are to the stratagem array
+function nextSequence() {
+    const sequenceIndex = Math.floor(Math.random() * possibleSequences.length);
+    const selectedSequence = possibleSequences[sequenceIndex];
+    sequence = selectedSequence.sequence;
+    sequenceName = selectedSequence.name;
+    renderSequence(sequence);
+};
 
 nextSequence(); // Initial sequence
 
@@ -114,14 +121,5 @@ if (direction === sequence[sequenceIndexCounter]) {
 };
 };
 };
-
-
-function resetTints() {
-    app.stage.children.forEach(sprite => {
-        if (sprite.tint !== 0xffffff) {
-            sprite.tint = 0xffffff;
-        }
-    });
-}
 
 document.addEventListener('keydown', handleKeyPress);
