@@ -8,6 +8,12 @@ const app = new PIXI.Application({
     width: Math.max(1, window.innerWidth),
 });
 
+PIXI.Assets.load('Assets/gfx/up.png');
+PIXI.Assets.load('Assets/gfx/down.png');
+PIXI.Assets.load('Assets/gfx/left.png');
+PIXI.Assets.load('Assets/gfx/right.png');
+
+
 // Values for game logic
 let sequenceIndexCounter = 0;
 let incorrectInput = false;
@@ -21,6 +27,8 @@ function resetTints() {
     });
 }
 
+
+
 function renderSequence(sequence) {
      // x & y setup for arrow placement
     let x = app.screen.width / 2 - (sequence.length - 1) * 35;
@@ -33,16 +41,16 @@ function renderSequence(sequence) {
         let sprite;
         switch (direction) {
             case 'up':
-                sprite = PIXI.Sprite.from('up.png');
+                sprite = PIXI.Sprite.from('Assets/gfx/up.png');
                 break;
             case 'down':
-                sprite = PIXI.Sprite.from('down.png');
+                sprite = PIXI.Sprite.from('Assets/gfx/down.png');
                 break;
             case 'right':
-                sprite = PIXI.Sprite.from('right.png');
+                sprite = PIXI.Sprite.from('Assets/gfx/right.png');
                 break;
             case 'left':
-                sprite = PIXI.Sprite.from('left.png');
+                sprite = PIXI.Sprite.from('Assets/gfx/left.png');
                 break;
             default:
                 // Nothing
