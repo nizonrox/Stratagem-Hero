@@ -14,6 +14,29 @@ PIXI.Assets.load('Assets/gfx/left.png');
 PIXI.Assets.load('Assets/gfx/right.png');
 
 
+PIXI.sound.add('Correct1', 'Assets/sfx/SH_Correct1.ogg');
+PIXI.sound.add('Correct2', 'Assets/sfx/SH_Correct2.ogg');
+PIXI.sound.add('Correct3', 'Assets/sfx/SH_Correct3.ogg');
+PIXI.sound.add('Input1', 'Assets/sfx/SH_Input1.ogg');
+PIXI.sound.add('Input2', 'Assets/sfx/SH_Input2.ogg');
+PIXI.sound.add('Input3', 'Assets/sfx/SH_Input3.ogg');
+PIXI.sound.add('Input4', 'Assets/sfx/SH_Input4.ogg');
+PIXI.sound.add('Failed', 'Assets/sfx/SH_FailedShort.ogg');
+PIXI.sound.add('Startup', 'Assets/sfx/SH_Startup.ogg');
+
+PIXI.sound.Sound.from({
+    url: 'Assets/sfx/SH_BackgroundLoop.ogg',
+    preload: true,
+    loop: true,
+    loaded: function(err, sound) {
+        sound.play({
+            volume: 1,
+        });
+        PIXI.sound.play('Startup');
+    }
+});
+
+
 // Values for game logic
 let sequenceIndexCounter = 0;
 let incorrectInput = false;
@@ -106,6 +129,7 @@ const direction = {
 }[key];
 
 if (direction) {
+    PIXI.sound.play('Input1');
 if (incorrectInput) {
     resetTints();
     incorrectInput = false;
@@ -118,11 +142,13 @@ if (direction === sequence[sequenceIndexCounter]) {
     if (sequenceIndexCounter === sequence.length) {
         sequenceIndexCounter = 0;
         nextSequence(); // Call next sequence
+        PIXI.sound.play('Correct1');
     }
 } else {
     for (let i = 0; i < sequenceIndexCounter; i++) {
         const previousCorrectSprite = app.stage.children[i];
         previousCorrectSprite.tint = 0xff0000;
+        PIXI.sound.play('Failed');
     }
     sequenceIndexCounter = 0;
     incorrectInput = true;
