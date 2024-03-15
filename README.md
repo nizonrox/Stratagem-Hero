@@ -10,7 +10,6 @@ TODO:
 - Add timer
 - Add rounds
 - Add score
-- Add sounds
 - Proof read all stratagems
 - Add stratagem icons/images
 - Fix windows resize
